@@ -1,0 +1,6 @@
+target
+*.class
+*.log
+web-app/plugins
+web-app/WEB-INF/lib
+.DS_Store
