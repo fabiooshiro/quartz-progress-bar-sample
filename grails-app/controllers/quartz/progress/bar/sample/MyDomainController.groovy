@@ -27,25 +27,25 @@ class MyDomainController {
             return
         }
 		def progBarId = QuartzProgressBar.execute{ ctx, progressBar ->
-			progressBar.total = 42
-			42.times{
-				progressBar.step = it + 1
-				progressBar.msg = "step ${progressBar.step} of ${progressBar.total}"
-				sleep(128)
-			}	
-			progressBar.msg = "done"
-    	}
-		def progBarId2 = QuartzProgressBar.execute{ ctx, progressBar ->
-			progressBar.total = 42
-			12.times{
-				progressBar.step = it + 1
-				progressBar.msg = "step ${progressBar.step} of ${progressBar.total}"
-				sleep(256)
-			}
-			progressBar.msg = "done"
-			throw new RuntimeException("some error")
-		}
-		flash.message = message(code: 'default.created.message', args: [message(code: 'myDomain.label', default: 'MyDomain'), myDomainInstance.id])
+            progressBar.total = 42
+            42.times{
+                progressBar.step = it + 1
+                progressBar.msg = "step ${progressBar.step} of ${progressBar.total}"
+                sleep(128)
+            }
+            progressBar.msg = "done"
+        }
+        def progBarId2 = QuartzProgressBar.execute{ ctx, progressBar ->
+            progressBar.total = 42
+            12.times{
+                progressBar.step = it + 1
+                progressBar.msg = "step ${progressBar.step} of ${progressBar.total}"
+                sleep(256)
+            }
+            progressBar.msg = "done"
+            throw new RuntimeException("some error")
+        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'myDomain.label', default: 'MyDomain'), myDomainInstance.id])
         redirect(action: "show", id: myDomainInstance.id, params : [progBarId: progBarId, progBarId2: progBarId2])
     }
 
